@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 
-const apiKey = '***************';
+const apiKey = '***********';
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,8 +26,9 @@ app.post('/', function (req, res) {
       if(weather.main == undefined){
         res.render('index', {weather: null, error: 'Error, please try again'});
       } else {
-        let weatherText = `It's ${weather.main.temp} degrees in ${weather.name} and
-        the weather description: ${weather.weather[0].description}.`;
+        let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}.
+         \nThe weather description: ${weather.weather[0].description}.\n Maximum Temperature: ${weather.main.temp_max} degrees\n
+         Minimum Temperature: ${weather.main.temp_min} degrees\n Humidity: ${weather.main.humidity}gpc`;
         res.render('index', {weather: weatherText, error: null});
       }
     }
